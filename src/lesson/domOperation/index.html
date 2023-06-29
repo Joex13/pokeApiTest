@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>DOM Operation</title>
+</head>
+<body>
+  <div class="wrapper">
+    <section class="overview">
+      <h1 id="title" class="title animate__animated">
+        <span class="circle"></span>
+        DOM <span class="accent">Operation</span></h1>
+      <p class="text">The document object model (DOM) is a programming interface for web documents. To express the page, the program can change the document structure, style, and content.</p>
+      <button id="button" type="button" class="button">animation</button>
+    </section>
+    <div class="card">
+      <article class="card-type card-type--mocha">
+        <h2 class="card-type__title">
+          <span class="card-type__circle"></span>
+          Node Type
+        </h2>
+        <ul class="menu">
+          <li>Document</li>
+          <li>Element</li>
+          <li>Text</li>
+        </ul>
+      </article>
+      <article class="card-type card-type--yellow animate__animated" style="display: none;">
+        <h2 class="card-type__title">
+          <span class="card-type__circle"></span>
+          Event Type
+        </h2>
+        <ul class="menu">
+          <li>click</li>
+          <li>DOMContentLoaded</li>
+          <li>mousedown</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

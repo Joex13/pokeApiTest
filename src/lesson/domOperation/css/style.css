@@ -1,0 +1,126 @@
+:root {
+  --white: #fbfdfc;
+  --background: #E7E9E8;
+  --primary: #d4c4b9;
+  --secondary: #d16534;
+  --accent: #efdc11;
+}
+
+body {
+  height: 100%;
+  background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  padding: 0 60px;
+  width: 80%;
+  height: 80vh;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.overview {
+  flex-basis: 60%;
+}
+
+.title {
+  color: var(--secondary);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.text {
+  color: var(--primary);
+  margin-top: 24px;
+}
+
+.button {
+  background-color: var(--secondary);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  margin-top: 32px;
+  cursor: pointer;
+  letter-spacing: .1em;
+  transition: opacity .3s;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    opacity: .8;
+  }
+}
+
+.circle {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  vertical-align: sub;
+}
+
+.card {
+  flex-basis: 40%;
+  height: 344px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-type {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.card-type--mocha {
+  background-color: var(--primary);
+}
+
+.card-type--yellow {
+  background-color: var(--accent);
+}
+
+.card-animation {
+  animation: slide 1.2s;
+}
+
+.card-type:not(:first-child) {
+  margin-top: 24px;
+}
+
+.card-type__circle {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--white);
+  vertical-align: sub;
+}
+
+.card-type__title {
+  color: var(--white);
+}
+@keyframes slide {
+  0% {
+  transform: translateY(92px);
+  }
+
+  100% {
+  transform: translateY(0px);
+  }
+}
+
+.menu {
+  color: var(--white);
+  margin-top: 12px;
+  list-style-type: disc;
+  padding-left: 20px;
+}

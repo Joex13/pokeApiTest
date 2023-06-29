@@ -1,0 +1,28 @@
+{
+  "name": "javascript-advanced",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev:dom": "cross-env LESSON_NAME=lesson/domOperation vite",
+    "dev:ajax": "cross-env LESSON_NAME=lesson/ajax vite",
+    "dev:promise": "cross-env LESSON_NAME=lesson/promise vite",
+    "dev:practice": "cross-env LESSON_NAME=practice vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^2.0.1",
+    "cross-env": "^7.0.3",
+    "terser": "^5.14.2",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "axios": "^1.1.3",
+    "eslint": "^8.43.0"
+  },
+  "volta": {
+    "node": "16.17.0",
+    "npm": "6.14.5"
+  }
+}

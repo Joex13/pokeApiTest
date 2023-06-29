@@ -3,7 +3,7 @@
   --text: #142a47;
   --border: #e3e3e3;
   --primary: #fd7d40;
-  --danger: #F15B47;
+  --danger: #f15b47;
 }
 
 .wrapper {
@@ -37,7 +37,7 @@
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(32%, 240px), 1fr));
-  column-gap: clamp(.5rem, 2vw, 12px);
+  column-gap: clamp(0.5rem, 2vw, 12px);
   row-gap: clamp(1rem, 2vmax, 24px);
 }
 
@@ -52,11 +52,20 @@
 
 .character__name {
   margin-top: 5px;
-  font-size: clamp(.85rem, 1.7vmax, 18px);
+  font-size: clamp(0.85rem, 1.7vmax, 18px);
   color: var(--text);
 }
 
 .error-message {
   color: var(--danger);
   text-align: center;
+}
+
+.reset-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
 }

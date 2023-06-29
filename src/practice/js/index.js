@@ -40,7 +40,7 @@ const createListDOM = (element) => {
 const createErrorText = (err) =>
   document.getElementsByClassName('main')[0].prepend(createErrorElement(err));
 
-window.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const response = await $axios(
     'https://pokeapi.co/api/v2/pokemon/?limit=151'
   ).catch((err) => createErrorText(err));
@@ -69,4 +69,10 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   array.forEach((element) => createListDOM(element));
+  document
+    .getElementsByClassName('reset-button')[0]
+    .addEventListener('click', () => {
+      document.getElementsByClassName('list')[0].innerHTML = ''; //リストタグ内をクリアする
+      array.forEach((element) => createListDOM(element));
+    });
 });

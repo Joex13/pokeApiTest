@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           return res.data.names[0].name;
         })
       ),
-      pokeDex: responseDetail.data,
-      pokeDexDetail: responseJpn.data,
+      weight: responseDetail.data.weight,
+      height: responseDetail.data.height,
     };
 
     array.push(obj);
@@ -100,19 +100,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       )[0].textContent = `図鑑番号:${array[i].id}`;
       document.getElementsByClassName(
         'pokemon-info__dex-height'
-      )[0].textContent = `身長:${array[i].pokeDex.height / 10}m`;
+      )[0].textContent = `身長:${array[i].height / 10}m`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-weight'
+      )[0].textContent = `体重:${array[i].weight / 10}kg`;
     });
-    document.getElementsByClassName(
-      'pokemon-info__dex-weight'
-    )[0].textContent = `体重:${array[i].pokeDex.weight / 10}kg`;
-    const jpnFlavorTexts = array[i].pokeDexDetail.flavor_text_entries.filter(
-      (text) => text.language.name === 'ja'
-    );
-    jpnFlavorTexts.forEach((text) =>
-      document
-        .getElementsByClassName('pokemon-info__dex-text-list')[0]
-        .appendChild(createElements(`<li>${text.flavor_text}</li>`))
-    );
   }
 
   document.getElementsByClassName('modal')[0].addEventListener('click', () => {

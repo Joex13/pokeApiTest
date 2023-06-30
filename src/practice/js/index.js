@@ -31,11 +31,15 @@ const createListDOM = (element) => {
       newArray = array.filter((pokemon) =>
         pokemon.types.includes(typeElements[i].textContent)
       );
-      document.getElementsByClassName('list')[0].innerHTML = ''; //リストタグ内をクリアする
+      clearListDOM();
       newArray.forEach((element) => createListDOM(element));
+      document.getElementById('type').value = typeElements[i].textContent;
     });
   }
 };
+
+const clearListDOM = () =>
+  (document.getElementsByClassName('list')[0].innerHTML = '');
 
 const createErrorText = (err) =>
   document.getElementsByClassName('main')[0].prepend(createErrorElement(err));
@@ -69,10 +73,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   array.forEach((element) => createListDOM(element));
+
+  document.getElementById('type').addEventListener('change', function () {
+    if (this.value === 'すべて表示') {
+      clearListDOM();
+      array.forEach((element) => createListDOM(element));
+    }
+    newArray = array.filter((pokemon) => pokemon.types.includes(this.value));
+    clearListDOM();
+    newArray.forEach((element) => createListDOM(element));
+  });
+
   document
     .getElementsByClassName('reset-button')[0]
     .addEventListener('click', () => {
-      document.getElementsByClassName('list')[0].innerHTML = ''; //リストタグ内をクリアする
+      clearListDOM();
+      document.getElementById('type').options[0].selected = true;
       array.forEach((element) => createListDOM(element));
     });
 });

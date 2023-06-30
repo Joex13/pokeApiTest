@@ -100,6 +100,7 @@
   left: 25%;
   background-color: rgba(127, 255, 212, 0.603);
   padding: 4px;
+  text-align: center;
 }
 
 .pokemon-info.js-opened {
@@ -107,6 +108,8 @@
   z-index: 110;
 }
 
-.pokemon-info__button-close {
-  text-align: right;
+.pokemon-info__img {
+  display: block;
+  margin: 0 auto;
+  width: 33%;
 }

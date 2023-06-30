@@ -46,7 +46,7 @@ const createErrorText = (err) =>
 
 document.addEventListener('DOMContentLoaded', async () => {
   const response = await $axios(
-    'https://pokeapi.co/api/v2/pokemon/?limit=10'
+    'https://pokeapi.co/api/v2/pokemon/?limit=151'
   ).catch((err) => createErrorText(err));
 
   for (const element of response.data.results) {
@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       ),
       weight: responseDetail.data.weight,
       height: responseDetail.data.height,
+      texts: responseJpn.data.flavor_text_entries,
     };
 
     array.push(obj);
@@ -104,6 +105,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementsByClassName(
         'pokemon-info__dex-weight'
       )[0].textContent = `体重:${array[i].weight / 10}kg`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-text-list'
+      )[0].innerHTML = '';
+      const jpnTexts = array[i].texts.filter(
+        (text) => text.language.name === 'ja'
+      );
+      document
+        .getElementsByClassName('pokemon-info__dex-text-list')[0]
+        .appendChild(
+          createElements(
+            `<li>${
+              jpnTexts[Math.floor(Math.random() * jpnTexts.length)].flavor_text
+            }</li>`
+          )
+        );
+      document.getElementsByClassName('pokemon-info__img')[0].src =
+        array[i].img;
     });
   }
 

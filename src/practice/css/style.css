@@ -75,3 +75,38 @@
 .reset-button:hover {
   opacity: 0.8;
 }
+
+.modal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #142a473f;
+}
+
+.modal.js-opened {
+  display: block;
+  z-index: 100;
+}
+
+.pokemon-info {
+  display: none;
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  background-color: rgba(127, 255, 212, 0.603);
+  padding: 4px;
+}
+
+.pokemon-info.js-opened {
+  display: block;
+  z-index: 110;
+}
+
+.pokemon-info__button-close {
+  text-align: right;
+}

@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           return res.data.names[0].name;
         })
       ),
+      pokeDex : responseJpn.data,
     };
 
     array.push(obj);
@@ -84,6 +85,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     newArray.forEach((element) => createListDOM(element));
   });
 
+  const pokemonImgs = document.getElementsByClassName('character__img');
+  for (let i = 0; i < pokemonImgs.length; i++) {
+    pokemonImgs[i].addEventListener('click', async () => {
+      document.getElementsByClassName('modal')[0].classList.add('js-opened');
+      document
+        .getElementsByClassName('pokemon-info')[0]
+        .classList.add('js-opened');
+      document.body.style.overflowY = 'hidden';
+    });
+  }
+
+  document.getElementsByClassName('modal')[0].addEventListener('click', () => {
+    document.getElementsByClassName('modal')[0].classList.remove('js-opened');
+    document
+      .getElementsByClassName('pokemon-info')[0]
+      .classList.remove('js-opened');
+    document.body.style.overflowY = '';
+  });
+
   document
     .getElementsByClassName('reset-button')[0]
     .addEventListener('click', () => {
@@ -91,4 +111,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('type').options[0].selected = true;
       array.forEach((element) => createListDOM(element));
     });
+
+    console.log(array)
 });

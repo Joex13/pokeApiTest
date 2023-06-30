@@ -46,13 +46,14 @@ const createErrorText = (err) =>
 
 document.addEventListener('DOMContentLoaded', async () => {
   const response = await $axios(
-    'https://pokeapi.co/api/v2/pokemon/?limit=151'
+    'https://pokeapi.co/api/v2/pokemon/?limit=10'
   ).catch((err) => createErrorText(err));
 
   for (const element of response.data.results) {
     const responseDetail = await $axios(element.url).catch((err) =>
       createErrorText(err)
     );
+
     const responseJpn = await $axios(responseDetail.data.species.url).catch(
       (err) => createErrorText(err)
     );
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           return res.data.names[0].name;
         })
       ),
-      pokeDex : responseJpn.data,
+      pokeDex: responseDetail.data,
     };
 
     array.push(obj);
@@ -87,13 +88,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const pokemonImgs = document.getElementsByClassName('character__img');
   for (let i = 0; i < pokemonImgs.length; i++) {
-    pokemonImgs[i].addEventListener('click', async () => {
+    pokemonImgs[i].addEventListener('click', () => {
       document.getElementsByClassName('modal')[0].classList.add('js-opened');
       document
         .getElementsByClassName('pokemon-info')[0]
         .classList.add('js-opened');
       document.body.style.overflowY = 'hidden';
+      document.getElementsByClassName(
+        'pokemon-info__dex-id'
+      )[0].textContent = `図鑑番号:${array[i].id}`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-height'
+      )[0].textContent = `身長:${array[i].pokeDex.height / 10}m`;
     });
+    document.getElementsByClassName(
+      'pokemon-info__dex-weight'
+    )[0].textContent = `体重:${array[i].pokeDex.weight / 10}kg`;
   }
 
   document.getElementsByClassName('modal')[0].addEventListener('click', () => {
@@ -112,5 +122,5 @@ document.addEventListener('DOMContentLoaded', async () => {
       array.forEach((element) => createListDOM(element));
     });
 
-    console.log(array)
+  console.log(array);
 });

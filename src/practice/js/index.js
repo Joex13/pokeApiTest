@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
       ),
       pokeDex: responseDetail.data,
+      pokeDexDetail: responseJpn.data,
     };
 
     array.push(obj);
@@ -104,6 +105,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementsByClassName(
       'pokemon-info__dex-weight'
     )[0].textContent = `体重:${array[i].pokeDex.weight / 10}kg`;
+    const jpnFlavorTexts = array[i].pokeDexDetail.flavor_text_entries.filter(
+      (text) => text.language.name === 'ja'
+    );
+    jpnFlavorTexts.forEach((text) =>
+      document
+        .getElementsByClassName('pokemon-info__dex-text-list')[0]
+        .appendChild(createElements(`<li>${text.flavor_text}</li>`))
+    );
   }
 
   document.getElementsByClassName('modal')[0].addEventListener('click', () => {

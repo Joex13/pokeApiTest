@@ -36,6 +36,7 @@ const createListDOM = (element) => {
       document.getElementById('type').value = typeElements[i].textContent;
     });
   }
+  genJs(newArray);
 };
 
 const clearListDOM = () =>
@@ -43,6 +44,45 @@ const clearListDOM = () =>
 
 const createErrorText = (err) =>
   document.getElementsByClassName('main')[0].prepend(createErrorElement(err));
+
+const genJs = (array) => {
+  const pokemonImgs = document.getElementsByClassName('character__img');
+  for (let i = 0; i < pokemonImgs.length; i++) {
+    pokemonImgs[i].addEventListener('click', () => {
+      document.getElementsByClassName('modal')[0].classList.add('js-opened');
+      document
+        .getElementsByClassName('pokemon-info')[0]
+        .classList.add('js-opened');
+      document.body.style.overflowY = 'hidden';
+      document.getElementsByClassName(
+        'pokemon-info__dex-id'
+      )[0].textContent = `図鑑番号:${array[i].id}`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-height'
+      )[0].textContent = `身長:${array[i].height / 10}m`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-weight'
+      )[0].textContent = `体重:${array[i].weight / 10}kg`;
+      document.getElementsByClassName(
+        'pokemon-info__dex-text-list'
+      )[0].innerHTML = '';
+      const jpnTexts = array[i].texts.filter(
+        (text) => text.language.name === 'ja'
+      );
+      document
+        .getElementsByClassName('pokemon-info__dex-text-list')[0]
+        .appendChild(
+          createElements(
+            `<li>${
+              jpnTexts[Math.floor(Math.random() * jpnTexts.length)].flavor_text
+            }</li>`
+          )
+        );
+      document.getElementsByClassName('pokemon-info__img')[0].src =
+        array[i].img;
+    });
+  }
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
   const response = await $axios(
@@ -86,44 +126,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     newArray = array.filter((pokemon) => pokemon.types.includes(this.value));
     clearListDOM();
     newArray.forEach((element) => createListDOM(element));
+    genJs(newArray);
   });
 
-  const pokemonImgs = document.getElementsByClassName('character__img');
-  for (let i = 0; i < pokemonImgs.length; i++) {
-    pokemonImgs[i].addEventListener('click', () => {
-      document.getElementsByClassName('modal')[0].classList.add('js-opened');
-      document
-        .getElementsByClassName('pokemon-info')[0]
-        .classList.add('js-opened');
-      document.body.style.overflowY = 'hidden';
-      document.getElementsByClassName(
-        'pokemon-info__dex-id'
-      )[0].textContent = `図鑑番号:${array[i].id}`;
-      document.getElementsByClassName(
-        'pokemon-info__dex-height'
-      )[0].textContent = `身長:${array[i].height / 10}m`;
-      document.getElementsByClassName(
-        'pokemon-info__dex-weight'
-      )[0].textContent = `体重:${array[i].weight / 10}kg`;
-      document.getElementsByClassName(
-        'pokemon-info__dex-text-list'
-      )[0].innerHTML = '';
-      const jpnTexts = array[i].texts.filter(
-        (text) => text.language.name === 'ja'
-      );
-      document
-        .getElementsByClassName('pokemon-info__dex-text-list')[0]
-        .appendChild(
-          createElements(
-            `<li>${
-              jpnTexts[Math.floor(Math.random() * jpnTexts.length)].flavor_text
-            }</li>`
-          )
-        );
-      document.getElementsByClassName('pokemon-info__img')[0].src =
-        array[i].img;
-    });
-  }
+  genJs(array);
 
   document.getElementsByClassName('modal')[0].addEventListener('click', () => {
     document.getElementsByClassName('modal')[0].classList.remove('js-opened');

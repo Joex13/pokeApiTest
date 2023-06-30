@@ -68,4 +68,10 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.reset-button:hover {
+  opacity: 0.8;
 }
